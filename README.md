@@ -20,29 +20,27 @@ This SNS application includes the following features:
   - Friend request approval
   - DM (Direct Message) sending dialog
 
-### Models (Django RestFramework)
+- **Models (Django RestFramework)**
+  - User (email, password)
+  - Profile (userPro, nickName, created_on, img)
+  - FriendRequest (askFrom, askTo, approved)
+  - Message (sender, receiver, message)
 
-- **User** (email, password)
-- **Profile** (userPro, nickName, created_on, img)
-- **FriendRequest** (askFrom, askTo, approved)
-- **Message** (sender, receiver, message)
-
-### API Endpoints
-
-Detailed API routing including creation, retrieval, update, and deletion for User, Profile, FriendRequest, and Message entities
+- **API Endpoints**
+  - Detailed API routing including creation, retrieval, update, and deletion for User, Profile, FriendRequest, and Message entities
 
 ## Tech Stack
 
 - **Front-end**: React
 - **Back-end**: Django RestFramework
-- **Database**: PostgreSQL (recommended)
+- **Database**: PostgreSQL
 
 ## System Requirements
 
 - Poetry: 1.1.14
 - Python: 3.11.4
 - Django: 5.0.3
-- Django RestFramework (DRF): 3.15.0
+- Django RestFramework: 3.15.0
 
 ## Installation
 
