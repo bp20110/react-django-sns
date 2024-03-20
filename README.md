@@ -1,6 +1,6 @@
 # react-django-sns
 
-Developing an SNS application using the JavaScript web framework React for the front end and the Python web framework Django RestFramework for the back end. This project is aimed at learning through building, focusing on front-end component-based development with React and API design using Django RestFramework.
+Developing an SNS application using the JavaScript web framework React for the front end and the Python web framework Django RestFramework for the back end. 
 
 ## Motivation
 
