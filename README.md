@@ -44,4 +44,25 @@ This SNS application includes the following features:
 
 ## Installation
 
-As this project is in the early stages of development, installation instructions will be updated later.
+To use this project, please follow the steps below.
+
+### 1. Installing Required Tools
+To run this project, Python and Poetry are required. Please install Python 3.11.4 and Poetry 1.1.14
+
+### 2. Cloning the Project
+Clone the project from GitHub to your local system.
+
+```bash
+git clone https://github.com/bp20110/react-django-sns.git
+cd react-django-sns
+```
+
+### 3. Installing Dependencies
+Use Poetry to install the project's dependencies.
+
+```bash
+poetry install
+```
+
+### 4. Starting Development
+Now that the environment is set up, you can start your development!
