@@ -6,7 +6,7 @@ from django.db.models import Q
 class FriendsFilter(serializers.PrimaryKeyRelatedField):
     def get_queryset(self):
         request = self.context['request']
-        friends = FriendRequest.objects.filter(Q(askTo=request) & Q(approved=True))
+        friends = FriendRequest.objects.filter(Q(askTo=request.user) & Q(approved=True))
         
         list_friend = []
         for friend in friends:

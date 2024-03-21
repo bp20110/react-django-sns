@@ -6,7 +6,7 @@ from django.conf import settings
 #フロントエンド側から送られてくるファイル名を整形する
 def upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    return '/'.join(['image'], str(instance.userPro.id)+str(instance.nickName)+str(".")+str(ext))
+    return '/'.join(['image', str(instance.userPro.id)+str(instance.nickName)+str(".")+str(ext)])
 
 
 #UserManagerマネージャーのオーバーライド
