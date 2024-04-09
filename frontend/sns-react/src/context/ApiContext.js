@@ -1,4 +1,4 @@
-import React, {creteContext, useState, useEffect, createContext } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import { withCookies } from 'react-cookie'
 import axios from 'axios'
 export const ApiContext = createContext()
@@ -8,7 +8,7 @@ const ApiContextProvider = (props) => {
     const token = props.cookies.get('current-token')
     const [profile, setProfile] = useState([])
     const [profiles, setProfiles] = useState([])
-    const [editedProfile, setEditedProfile] = useState({id:'', "nickName": ''})
+    const [editedProfile, setEditedProfile] = useState({id:'', nickName: ''})
     const [askList, setAskList] = useState([])
     const [askListFull, setAskListFull] = useState([])
     const [inbox, setInbox] = useState([])
@@ -20,53 +20,56 @@ const ApiContextProvider = (props) => {
                 const resmy = await axios.get('http://localhost:8000/api/user/myprofile/',{
                     headers: {
                         'Authorization': `Token ${token}`
-                    }
-                })
+                    },
+                });
                 const res = await axios.get('http://localhost:8000/api/user/approval/',{
                     headers: {
                         'Authorization': `Token ${token}`
-                    }                
-                })
-                resmy.data[0] && setProfile(resmy.data[0])
-                resmy.data[0] && setEditedProfile({id:resmy.data[0].id, nickName: resmy.data[0].nickName})
-                resmy.data[0] && setAskList(res.data.filter(ask => {return resmy.data[0].userPro === ask.askTo}))
-                setAskListFull(res.data)
+                    },                
+                });
+                resmy.data[0] && setProfile(resmy.data[0]);
+                resmy.data[0] && setEditedProfile({id:resmy.data[0].id, nickName: resmy.data[0].nickName});
+                resmy.data[0] && setAskList(res.data.filter(ask => {return resmy.data[0].userPro === ask.askTo}));
+                setAskListFull(res.data);
             }
             catch {
                 console.log("error")
             }
+        };
 
-            const getProfile = async() => {
-                try {
-                    const res = await axios.get('http://localhost:8000/api/user/profile/',{
-                        headers: {
-                            'Authorization': `Token ${token}`
-                        }
-                    })
-                    setProfiles(res.data)
-                }
-                catch {
-                    console.log("error")
-                }
+        const getProfile = async() => {
+            try {
+                const res = await axios.get('http://localhost:8000/api/user/profile/',{
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    },
+                });
+                setProfiles(res.data);
             }
-            const getInbox = async() => {
-                try {
-                    const res = await axios.get('http://localhost:8000/api/dm/inbox/',{
-                        headers: {
-                            'Authorization': `Token ${token}`
-                        }
-                    })
-                    setInbox(res.data)
-                }
-                catch {
-                    console.log("error")
-                }
+            catch {
+                console.log("error");
             }
-            getMyProfile()
-            getProfile()
-            getInbox()
-        }
-    },[token, profile.id])
+        };
+
+        const getInbox = async() => {
+            try {
+                const res = await axios.get('http://localhost:8000/api/dm/inbox/',{
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                    },
+                });
+                setInbox(res.data);
+            }
+            catch {
+                console.log("error");
+            }
+        };
+
+        getMyProfile();
+        getProfile();
+        getInbox();
+        
+    },[token, profile.id]);
 
     const createProfile = async() => {
         const createData = new FormData()
@@ -195,23 +198,25 @@ const ApiContextProvider = (props) => {
     }
 
     return (
-        <ApiContext.Provider value={{
-            profile,
-            profiles,
-            cover,
-            setCover,
-            askList,
-            askListFull,
-            inbox,
-            newRequestFriend,
-            createProfile,
-            editProfile,
-            deleteProfile,
-            changeApprovalRequest,
-            sendDMCont,
-            editedProfile,
-            setEditedProfile,
-        }}>
+        <ApiContext.Provider 
+            value={{
+                profile,
+                profiles,
+                cover,
+                setCover,
+                askList,
+                askListFull,
+                inbox,
+                newRequestFriend,
+                createProfile,
+                editProfile,
+                deleteProfile,
+                changeApprovalRequest,
+                sendDMCont,
+                editedProfile,
+                setEditedProfile,
+            }}
+        >
             {props.children}
         </ApiContext.Provider>
     )

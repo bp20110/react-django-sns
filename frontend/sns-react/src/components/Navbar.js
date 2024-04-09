@@ -31,7 +31,7 @@ const Navbar = (props) => {
         <Typography variant="h5" className={classes.title}>
           SNS App
         </Typography>
-        <Badge className={classes.bg}
+        <Badge overlap="rectangular" className={classes.bg}
             badgeContent={3}
             color="secondary"
             >
