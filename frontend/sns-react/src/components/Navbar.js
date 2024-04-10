@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { ApiContext } from '../context/ApiContext';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,7 +8,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Badge from '@material-ui/core/Badge';
 import { FiLogOut } from 'react-icons/fi';
 import { withCookies } from 'react-cookie';
-
 
 const useStyles = makeStyles((theme) => ({
   bg: {
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = (props) => {
   const classes = useStyles();
+  const {askList, profiles} = useContext(ApiContext);
   const Logout = () => event => {
     props.cookies.remove('current-token');
     window.location.href = '/';
@@ -32,7 +33,7 @@ const Navbar = (props) => {
           SNS App
         </Typography>
         <Badge overlap="rectangular" className={classes.bg}
-            badgeContent={3}
+            badgeContent={askList.filter(ask=>{return (ask.approved === false && profiles.filter(item=>{return item.userPro === ask.askFrom}))}).length}
             color="secondary"
             >
           <NotificationsIcon />

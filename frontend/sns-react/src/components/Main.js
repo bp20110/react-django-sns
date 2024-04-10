@@ -6,9 +6,10 @@ import { BsFillPeopleFill } from 'react-icons/bs';
 import Profile from './Profile'
 import ProfileManager from './ProfileManager';
 import Ask from './Ask';
+import InboxDM from './InboxDM';
 
 const Main = () => {
-  const { profiles, profile, askList, askListFull } = useContext(ApiContext)
+  const { profiles, profile, askList, askListFull, inbox } = useContext(ApiContext)
   const filterProfiles = profiles.filter(prof => {return prof.id !== profile.id})
   const listProfiles = filterProfiles && (
     filterProfiles.map((filprof) => <Profile key={filprof.id} profileData={filprof}
@@ -19,7 +20,9 @@ const Main = () => {
     <Grid container>
         <Grid item xs={4}>
             <div className='app-profiles'>
-              { listProfiles }
+              <div className='task-list'>
+                { listProfiles }
+              </div>
             </div>
         </Grid>
         <Grid item xs={4}>
@@ -31,19 +34,21 @@ const Main = () => {
               Approval request list
             </h3>
             <div className='app-details'>
-              <ul>
-                { console.log(askList) }
-                {profile.id &&
-                  askList.map((ask) => (
-                    <Ask 
-                      key={ask.id}
-                      ask={ask}
-                      prof={profiles.filter((item) => {
-                          return item.userPro === ask.askFrom;
-                      })}
-                    />
-                  ))}
-              </ul>
+              <div className='task-list'>
+                <ul>
+                  { console.log(askList) }
+                  {profile.id &&
+                    askList.map((ask) => (
+                      <Ask 
+                        key={ask.id}
+                        ask={ask}
+                        prof={profiles.filter((item) => {
+                            return item.userPro === ask.askFrom;
+                        })}
+                      />
+                    ))}
+                </ul>
+              </div>
             </div>
         </Grid>
         <Grid item xs={4}>
@@ -52,6 +57,20 @@ const Main = () => {
               DM Inbox
             </h3>
             <div className='app-dms'>
+              <div className='task-list'>
+                <ul>
+                  {profile.id &&
+                      inbox.map((dm) => (
+                        <InboxDM 
+                          key={dm.id}
+                          dm={dm}
+                          prof={profiles.filter((item) => {
+                              return item.userPro === dm.sender;
+                          })}
+                        />
+                      ))}
+                </ul>
+              </div>
             </div>
         </Grid>
     </Grid>
